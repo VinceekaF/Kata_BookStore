@@ -1,0 +1,29 @@
+<div class="card-title">
+  <mat-card-title>
+    Welcome to Harry Potter's book shop !
+  </mat-card-title>
+
+  <i class="material-icons">shopping_cart</i>
+</div>
+
+<table mat-table [dataSource]="books" class="mat-elevation-z8">
+  <ng-container matColumnDef="Title">
+    <th mat-header-cell *matHeaderCellDef> Title </th>
+    <td mat-cell *matCellDef="let book"> {{ book.title }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Price">
+    <th mat-header-cell *matHeaderCellDef> Price (€) </th>
+    <td mat-cell *matCellDef="let book"> {{ book.price }} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+
+<!-- <ul>
+  <li *ngFor="let book of books">{{book.title}}</li>
+</ul>
+
+<p>Some text</p> -->
