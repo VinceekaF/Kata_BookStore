@@ -8,7 +8,7 @@ namespace Kata_BookStore.BL
 {
     public class BookBO : IBookBo
     {
-        private readonly IBookRepository _repo; // = new InMemoryBookRepository();
+        private readonly IBookRepository _repo;
 
         public BookBO(IBookRepository repo)
         {

@@ -1,4 +1,5 @@
 ﻿using Kata_BookStore.Models;
+using Kata_BookStore.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,17 +7,23 @@ using System.Text;
 
 namespace Kata_BookStore.BL
 {
-    public class CartBO
+    public class CartBO : ICartBo
     {
-        private IEnumerable<Book> _currentCart;
+        private ICartRepository _repoCart;
 
-        public CartBO(IEnumerable<Book> currentCart)
+        public CartBO(ICartRepository repoCart)
         {
-            _currentCart = currentCart;
+            _repoCart = repoCart;
         }
-        public double TotalPrice(List<Book> currentCart)
+
+        public void AddBook(Book book)
         {
-            return currentCart.Select(_ => _.Price).Sum();
+            _repoCart.AddBook(book);
+        }
+
+        public double TotalPrice()
+        {
+            return _repoCart.TotalPrice();
         }
     }
 }

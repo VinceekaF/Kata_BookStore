@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from '../Book';
 import { BookService } from '../book.service';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-welcome',
@@ -13,7 +14,8 @@ export class WelcomeComponent implements OnInit {
   displayedColumns: string[] = ['Title', 'Price'];
 
   constructor(
-    private bookService: BookService
+    private bookService: BookService,
+    private cartService: CartService
   ) { }
 
   ngOnInit() {
@@ -23,4 +25,7 @@ export class WelcomeComponent implements OnInit {
     });
   }
 
+  addABookToCart(bookToAdd: Book) {
+    this.cartService.addABookToCart(bookToAdd);
+  }
 }

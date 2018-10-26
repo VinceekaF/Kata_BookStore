@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Kata_BookStore.BL
+namespace Kata_BookStore.Repository
 {
-    public interface  ICartBo
+    public interface ICartRepository
     {
         void AddBook(Book book);
         double TotalPrice();

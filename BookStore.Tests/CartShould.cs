@@ -15,8 +15,7 @@ namespace BookStore.Tests
         private static IBookRepository _repo = new InMemoryBookRepository();
         private IEnumerable<Book> list = _repo.GetAllBooks();
         private static Cart _myCart = new Cart();
-        private static IEnumerable<Book> currentCart = _myCart.cartList;
-        private CartBO bo = new CartBO(currentCart);
+        private CartBO bo = new CartBO(_myCart);
 
         [Fact]
         public void AddtheBookIWant()

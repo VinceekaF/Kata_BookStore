@@ -8,10 +8,10 @@ import { Book } from './Book';
 @Injectable({
   providedIn: 'root'
 })
-export class BookService {
+export class CartService {
 
   private headers: HttpHeaders;
-  private accessPointUrl = 'https://localhost:44367/api/Book';
+  private accessPointUrl = 'https://localhost:44367/api/Cart';
 
   constructor(private http: HttpClient) {
     this.headers = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' });
@@ -23,17 +23,9 @@ export class BookService {
     };
   }
 
-  public getAllBooks(): Observable<Book[]> {
-    console.log('in service');
-    const url = `${this.accessPointUrl}/GetAllBooks`;
-    return this.http.get<Book[]>(url, { headers: this.headers });
-    // .pipe(
-      //   catchError(this.handleError<Book[]>('books', [])));
+    public addABookToCart(book: Book) {
+      console.log(book);
+      const url = `${this.accessPointUrl}/AddBookToCart`;
+      this.http.post<Book>(url, book, {headers: this.headers});
     }
-
-    // public addABookToCart(book: Book) {
-    //   console.log(book);
-    //   const url = `${this.accessPointUrl}/Cart/AddBookToCart`;
-    //   return this.http.post<Book>(url, book, {headers: this.headers});
-    // }
-  }
+}

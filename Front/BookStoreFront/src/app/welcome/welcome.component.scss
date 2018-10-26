@@ -4,8 +4,16 @@ table {
 
 .card-title {
   margin-bottom: 25px;
-  margin-left: 25px;
+  margin-left: 50px;
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+i {
+  cursor: pointer;
+}
+
+mat-chip {
+  cursor: pointer;
 }

@@ -17,11 +17,13 @@ import { MatDatepickerModule, MatInputModule, MatNativeDateModule, MatMenuModule
   MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule,
   MatTooltipModule, MatTreeModule } from '@angular/material';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

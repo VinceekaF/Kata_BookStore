@@ -11,20 +11,20 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookStoreAPI.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class BookController : ControllerBase
+    public class CartController : ControllerBase
     {
-        private readonly IBookBo _bo;
+        private ICartBo _bo;
 
-        public BookController(IBookBo bo)
+        public CartController(ICartBo bo)
         {
             _bo = bo;
         }
-
-        [HttpGet("[action]")]
-        public IEnumerable<Book> GetAllBooks()
+        
+        [HttpPost]
+        public void AddBookToCart([FromBody]Book book)
         {
-            return _bo.GetAllBooks();
+            _bo.AddBook(book);
         }
+
     }
 }
