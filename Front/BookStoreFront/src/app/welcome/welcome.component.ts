@@ -32,6 +32,6 @@ export class WelcomeComponent implements OnInit {
   }
 
   openSnackBar(action: string) {
-    this.snackBar.open('1 book added to your cart', action, {duration: 1000});
+    this.snackBar.open('1 book just added to your cart', action, {duration: 1000});
   }
 }
