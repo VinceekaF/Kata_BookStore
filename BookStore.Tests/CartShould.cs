@@ -14,7 +14,7 @@ namespace BookStore.Tests
     {
         private static IBookRepository _repo = new InMemoryBookRepository();
         private IEnumerable<Book> list = _repo.GetAllBooks();
-        private static Cart _myCart = new Cart();
+        private static ICartRepository _myCart = new CartRepository();
         private CartBO bo = new CartBO(_myCart);
 
         [Fact]
@@ -24,7 +24,7 @@ namespace BookStore.Tests
             
             _myCart.AddBook(_book);
 
-            Assert.Contains(list.ElementAt(2).Id, _myCart.cartList.Select(b=>b.Id));
+            Assert.Contains(list.ElementAt(2).Id, _myCart.GetCurrentCartList().Select(b=>b.Id));
         }
 
 
@@ -37,7 +37,7 @@ namespace BookStore.Tests
                 _myCart.AddBook(book);
             }
 
-            double totalPrice = bo.TotalPrice(_myCart.cartList);
+            double totalPrice = bo.TotalPrice();
         }
 
     }

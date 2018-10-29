@@ -26,6 +26,6 @@ export class WelcomeComponent implements OnInit {
   }
 
   addABookToCart(bookToAdd: Book) {
-    this.cartService.addABookToCart(bookToAdd);
+    this.cartService.addABookToCart(bookToAdd).subscribe();
   }
 }

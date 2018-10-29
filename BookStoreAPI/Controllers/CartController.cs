@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BookStoreAPI.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     public class CartController : ControllerBase
     {
@@ -20,11 +21,22 @@ namespace BookStoreAPI.Controllers
             _bo = bo;
         }
         
-        [HttpPost]
-        public void AddBookToCart([FromBody]Book book)
+        [HttpPut("[action]")]
+        public void AddBookToCart(Book book)
         {
             _bo.AddBook(book);
         }
 
+        [HttpGet("[action]")]
+        public double GetTotalPrice()
+        {
+            return _bo.TotalPrice();
+        }
+
+        [HttpGet("[action]")]
+        public List<Book> GetListOfBooksInCart()
+        {
+            return _bo.GetCurrentCartList();
+        }
     }
 }

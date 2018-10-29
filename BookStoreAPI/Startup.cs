@@ -44,6 +44,7 @@ namespace BookStoreAPI
             });
 
             services.AddSingleton<IBookRepository, InMemoryBookRepository>();
+            services.AddSingleton<ICartRepository, CartRepository>();
             services.AddTransient<IBookBo, BookBO>();
             services.AddTransient<ICartBo, CartBO>();
 

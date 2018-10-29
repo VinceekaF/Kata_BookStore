@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from '../cart.service';
+import { Router } from '@angular/router';
+import { Book } from '../Book';
+
 
 @Component({
   selector: 'app-cart',
@@ -7,9 +11,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
-  constructor() { }
+  totalPrice = 0;
+  currentListOfBooks: Book[] = [];
+
+  constructor(
+    private cartService: CartService,
+    private router: Router,
+    ) { }
 
   ngOnInit() {
+    this.cartService.getTotalPrice().subscribe(data => this.totalPrice = data);
+    this.cartService.getCurrentCartList().subscribe(b => this.currentListOfBooks = b);
   }
 
+  goToWelcomePage() {
+    this.router.navigate(['/welcome']);
+  }
+
+  submitCart() {
+
+  }
 }

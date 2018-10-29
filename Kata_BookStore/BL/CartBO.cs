@@ -21,6 +21,11 @@ namespace Kata_BookStore.BL
             _repoCart.AddBook(book);
         }
 
+        public List<Book> GetCurrentCartList()
+        {
+            return _repoCart.GetCurrentCartList();
+        }
+
         public double TotalPrice()
         {
             return _repoCart.TotalPrice();

@@ -23,9 +23,19 @@ export class CartService {
     };
   }
 
-    public addABookToCart(book: Book) {
+    public addABookToCart(book: Book): Observable<Book> {
       console.log(book);
       const url = `${this.accessPointUrl}/AddBookToCart`;
-      this.http.post<Book>(url, book, {headers: this.headers});
+      return this.http.put<Book>(url, book, {headers: this.headers});
+    }
+
+    public getTotalPrice(): Observable<number> {
+      const url = `${this.accessPointUrl}/GetTotalPrice`;
+      return this.http.get<number>(url, {headers: this.headers});
+    }
+
+    public getCurrentCartList(): Observable<Book[]> {
+      const url = `${this.accessPointUrl}/GetListOfBooksInCart`;
+      return this.http.get<Book[]>(url, {headers: this.headers});
     }
 }

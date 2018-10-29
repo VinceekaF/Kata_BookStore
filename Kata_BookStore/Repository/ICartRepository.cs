@@ -9,5 +9,6 @@ namespace Kata_BookStore.Repository
     {
         void AddBook(Book book);
         double TotalPrice();
+        List<Book> GetCurrentCartList();
     }
 }

@@ -26,5 +26,10 @@ namespace Kata_BookStore.Repository
         {
             return cartList.Select(_ => _.Price).Sum();
         }
+
+        public List<Book> GetCurrentCartList()
+        {
+            return cartList;
+        }
     }
 }

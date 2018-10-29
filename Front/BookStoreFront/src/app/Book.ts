@@ -1,7 +1,6 @@
-import { Guid } from "guid-typescript";
 
 export class Book {
-  id: Guid;
+  id: string;
   title: string;
   price: number;
 }

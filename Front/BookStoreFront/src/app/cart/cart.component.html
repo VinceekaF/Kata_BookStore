@@ -1,3 +1,17 @@
-<p>
-  cart works!
-</p>
+<mat-card-title>
+  My Current Cart!
+</mat-card-title>
+
+<mat-card>
+  You are about to pay: {{totalPrice}} €
+</mat-card>
+
+<!-- <mat-grid-list cols="1" rowHeight="50px"><mat-chip-list>
+    <mat-grid-tile *ngFor="let book of currentListOfBooks" ><mat-chip color="primary" selected>{{book.title}}</mat-chip></mat-grid-tile>
+</mat-chip-list></mat-grid-list> -->
+
+
+<div class='buttons'>
+  <button mat-flat-button (click)="goToWelcomePage()" class='btnReturn'>Continue purchase</button>
+  <button mat-flat-button (click)="submitCart()" class='btnBuy'>Buy</button>
+</div>
