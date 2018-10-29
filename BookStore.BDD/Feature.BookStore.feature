@@ -18,4 +18,10 @@ Scenario Outline: Each time a customer add a book, it must be added in the cart
 	| title									     |
 	| 3. Harry Potter et le prisonnier d'Azkaban |
 	
-
+Scenario Outline: When I see my cart, I must see the current total price
+	Given I added <books> in my cart
+	When I open my cart
+	Then I have to see the total <price>
+	Examples: 
+	| books | price |
+	| 3		| 24    |

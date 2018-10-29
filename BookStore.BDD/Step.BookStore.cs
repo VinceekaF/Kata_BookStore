@@ -1,4 +1,5 @@
-﻿using Kata_BookStore.Models;
+﻿using Kata_BookStore.BL;
+using Kata_BookStore.Models;
 using Kata_BookStore.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -14,12 +15,18 @@ namespace BookStore.BDD
     public sealed class Step
     {
         IBookRepository _bookRepo = new InMemoryBookRepository();
-        Cart _cart = new Cart();
+        static ICartRepository _cartRepo = new CartRepository();
+        ICartBo _cartBo = new CartBO(_cartRepo);
 
         public static IEnumerable<Book> Output
         {
             get => ScenarioContext.Current.Get<List<Book>>(nameof(Output));
             set => ScenarioContext.Current.Set(value, nameof(Output));
+        }
+        public static double OutputPrice
+        {
+            get => ScenarioContext.Current.Get<double>(nameof(OutputPrice));
+            set => ScenarioContext.Current.Set(value, nameof(OutputPrice));
         }
 
         public static Book _book
@@ -40,6 +47,29 @@ namespace BookStore.BDD
             Assert.AreEqual(number,Output.Count());
         }
 
+        [Given(@"I added (.*) in my cart")]
+        public void GivenIAddedInMyCart(int numberOfBooksAdded)
+        {
+            Book _book = new Book() { Price = 8.0};
+            for (int i = 0; i<numberOfBooksAdded;i++)
+            {
+                _cartRepo.AddBook(_book);
+            }
+        }
+
+
+        [When(@"I open my cart")]
+        public void WhenIOpenMyCart()
+        {
+            OutputPrice = _cartBo.TotalPrice();
+        }
+
+        [Then(@"I have to see the total (.*)")]
+        public void ThenIHaveToSeeTheTotal(double totalPrice)
+        {
+            Assert.AreEqual(totalPrice, OutputPrice);
+        }
+
 
         [Given(@"I have a book (.*):")]
         public void GivenIHaveABook(string title)
@@ -51,8 +81,8 @@ namespace BookStore.BDD
         [When(@"I add it")]
         public void WhenIAddIt()
         {
-            _cart.AddBook(_book);
-            Output = _cart.cartList; ;
+            _cartRepo.AddBook(_book);
+            Output = _cartRepo.GetCurrentCartList(); ;
         }
 
         [Then(@"in my cart I must see the book (.*)")]

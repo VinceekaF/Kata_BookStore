@@ -24,11 +24,9 @@ export class BookService {
   }
 
   public getAllBooks(): Observable<Book[]> {
-    console.log('in service');
     const url = `${this.accessPointUrl}/GetAllBooks`;
-    return this.http.get<Book[]>(url, { headers: this.headers });
-    // .pipe(
-      //   catchError(this.handleError<Book[]>('books', [])));
+    return this.http.get<Book[]>(url, { headers: this.headers }).pipe(
+        catchError(this.handleError<Book[]>('books', [])));
     }
 
     // public addABookToCart(book: Book) {

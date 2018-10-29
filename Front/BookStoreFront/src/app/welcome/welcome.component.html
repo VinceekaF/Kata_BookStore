@@ -4,12 +4,12 @@
     Welcome to Harry Potter's book shop !
   </mat-card-title>
 
-  <i class="material-icons"><a [routerLink]="['/cart']" routerLinkActive="router-link-active" >shopping_cart</a></i>
+  <i class="material-icons"><a [routerLink]="['/cart']" routerLinkActive="router-link-active">shopping_cart</a></i>
 </div>
 
 
 <mat-grid-list cols="1" rowHeight="50px"><mat-chip-list>
-    <mat-grid-tile *ngFor="let book of books" ><mat-chip color="primary" selected (click)="addABookToCart(book)">{{book.title}}      {{ book.price }}€ </mat-chip></mat-grid-tile>
+    <mat-grid-tile *ngFor="let book of books" ><mat-chip color="primary" selected (click)="addABookToCart(book); openSnackBar()">{{book.title}}      {{ book.price }}€ </mat-chip></mat-grid-tile>
 </mat-chip-list></mat-grid-list>
 
 

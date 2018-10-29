@@ -115,6 +115,26 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
+        [Xunit.TheoryAttribute(DisplayName="When I see my cart, I must see the current total price")]
+        [Xunit.TraitAttribute("FeatureTitle", "Feature")]
+        [Xunit.TraitAttribute("Description", "When I see my cart, I must see the current total price")]
+        [Xunit.InlineDataAttribute("3", "24", new string[0])]
+        public virtual void WhenISeeMyCartIMustSeeTheCurrentTotalPrice(string books, string price, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When I see my cart, I must see the current total price", null, exampleTags);
+#line 21
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 22
+ testRunner.Given(string.Format("I added {0} in my cart", books), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 23
+ testRunner.When("I open my cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 24
+ testRunner.Then(string.Format("I have to see the total {0}", price), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
         [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.4.0.0")]
         [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
         public class FixtureData : System.IDisposable

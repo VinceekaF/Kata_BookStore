@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Book } from '../Book';
 import { BookService } from '../book.service';
 import { CartService } from '../cart.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-welcome',
@@ -15,7 +16,8 @@ export class WelcomeComponent implements OnInit {
 
   constructor(
     private bookService: BookService,
-    private cartService: CartService
+    private cartService: CartService,
+    public snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -27,5 +29,9 @@ export class WelcomeComponent implements OnInit {
 
   addABookToCart(bookToAdd: Book) {
     this.cartService.addABookToCart(bookToAdd).subscribe();
+  }
+
+  openSnackBar(action: string) {
+    this.snackBar.open('1 book added to your cart', action, {duration: 1000});
   }
 }

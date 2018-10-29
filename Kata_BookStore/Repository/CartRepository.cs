@@ -9,7 +9,6 @@ namespace Kata_BookStore.Repository
     public class CartRepository : ICartRepository
     {
         public List<Book> cartList;
-        public double totalPrice { get; set; }
 
         public CartRepository()
         {

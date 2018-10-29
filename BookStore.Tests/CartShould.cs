@@ -15,14 +15,14 @@ namespace BookStore.Tests
         private static IBookRepository _repo = new InMemoryBookRepository();
         private IEnumerable<Book> list = _repo.GetAllBooks();
         private static ICartRepository _myCart = new CartRepository();
-        private CartBO bo = new CartBO(_myCart);
+        private ICartBo bo = new CartBO(_myCart);
 
         [Fact]
         public void AddtheBookIWant()
         {
             Book _book = list.ElementAt(2);
             
-            _myCart.AddBook(_book);
+            bo.AddBook(_book);
 
             Assert.Contains(list.ElementAt(2).Id, _myCart.GetCurrentCartList().Select(b=>b.Id));
         }
@@ -34,11 +34,23 @@ namespace BookStore.Tests
 
             foreach(var book in list)
             {
-                _myCart.AddBook(book);
+                bo.AddBook(book);
             }
 
             double totalPrice = bo.TotalPrice();
         }
+
+
+        [Fact]
+        public void getTheCurrentListOfCustomer()
+        {
+            var listOfBooksInCart = bo.GetCurrentCartList();
+
+            Assert.Equal(_myCart.GetCurrentCartList(), listOfBooksInCart);
+
+
+        }
+
 
     }
 }

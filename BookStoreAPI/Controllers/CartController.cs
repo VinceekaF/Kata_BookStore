@@ -22,7 +22,7 @@ namespace BookStoreAPI.Controllers
         }
         
         [HttpPut("[action]")]
-        public void AddBookToCart(Book book)
+        public void AddBookToCart([FromBody]Book book)
         {
             _bo.AddBook(book);
         }

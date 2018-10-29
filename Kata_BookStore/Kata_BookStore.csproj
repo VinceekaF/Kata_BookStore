@@ -4,4 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Models\Cart.cs" />
+    <Compile Remove="Models\ICart.cs" />
+  </ItemGroup>
+
 </Project>
