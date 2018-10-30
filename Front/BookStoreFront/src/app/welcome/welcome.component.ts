@@ -17,7 +17,7 @@ export class WelcomeComponent implements OnInit {
   constructor(
     private bookService: BookService,
     private cartService: CartService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {

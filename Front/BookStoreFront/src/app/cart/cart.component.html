@@ -11,8 +11,8 @@
 </mat-chip-list></mat-grid-list> -->
 
 <div class='buttons'>
-  <button mat-flat-button (click)="goToWelcomePage()" class='btnReturn'>Continue purchase</button>
-  <button mat-flat-button (click)="submitCart()" class='btnBuy' disabled=true>Buy</button>
+  <mat-chip color="primary" (click)="goToWelcomePage()" class='btnReturn' selected>Continue purchase</mat-chip>
+  <mat-chip color="primary" (click)="submitCart()" class='btnBuy' selected>Buy</mat-chip>
 </div>
 
 

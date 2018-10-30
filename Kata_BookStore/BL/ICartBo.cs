@@ -10,5 +10,6 @@ namespace Kata_BookStore.BL
         void AddBook(Book book);
         double TotalPrice();
         List<Book> GetCurrentCartList();
+        double GetTotalPrice();
     }
 }

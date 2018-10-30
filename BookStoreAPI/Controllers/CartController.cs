@@ -28,15 +28,15 @@ namespace BookStoreAPI.Controllers
         }
 
         [HttpGet("[action]")]
-        public double GetTotalPrice()
-        {
-            return _bo.TotalPrice();
-        }
-
-        [HttpGet("[action]")]
         public List<Book> GetListOfBooksInCart()
         {
             return _bo.GetCurrentCartList();
+        }
+
+        [HttpGet("[action]")]
+        public double GetTotalPrice()
+        {
+            return Math.Round(_bo.GetTotalPrice(),2);
         }
     }
 }

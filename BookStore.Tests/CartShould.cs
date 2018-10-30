@@ -32,12 +32,8 @@ namespace BookStore.Tests
         public void ShowMeTheTotalPrice()
         {
 
-            foreach(var book in list)
-            {
-                bo.AddBook(book);
-            }
 
-            double totalPrice = bo.TotalPrice();
+            double totalPrice = bo.GetTotalPrice();
         }
 
 
@@ -47,10 +43,9 @@ namespace BookStore.Tests
             var listOfBooksInCart = bo.GetCurrentCartList();
 
             Assert.Equal(_myCart.GetCurrentCartList(), listOfBooksInCart);
-
-
         }
 
 
+        
     }
 }

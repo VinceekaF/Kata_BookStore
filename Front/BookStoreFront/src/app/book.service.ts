@@ -29,9 +29,4 @@ export class BookService {
         catchError(this.handleError<Book[]>('books', [])));
     }
 
-    // public addABookToCart(book: Book) {
-    //   console.log(book);
-    //   const url = `${this.accessPointUrl}/Cart/AddBookToCart`;
-    //   return this.http.post<Book>(url, book, {headers: this.headers});
-    // }
   }
