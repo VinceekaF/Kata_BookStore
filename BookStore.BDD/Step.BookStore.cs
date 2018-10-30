@@ -17,12 +17,15 @@ namespace BookStore.BDD
         InMemoryBookRepository _bookRepo;
         CartRepository _cartRepo;
         CartBO _cartBo;
+        List<Book> _books;
+
 
         public Step()
         {
             _bookRepo = new InMemoryBookRepository();
             _cartRepo = new CartRepository();
             _cartBo = new CartBO(_cartRepo);
+            _books = _bookRepo.GetAllBooks().ToList();
         }
 
         public static IEnumerable<Book> Output
@@ -36,7 +39,7 @@ namespace BookStore.BDD
             set => ScenarioContext.Current.Set(value, nameof(OutputPrice));
         }
 
-        public static Book _book
+        public Book _book
         {
             get => ScenarioContext.Current.Get<Book>(nameof(_book));
             set => ScenarioContext.Current.Set(value, nameof(_book));
@@ -54,49 +57,61 @@ namespace BookStore.BDD
             Assert.AreEqual(number,Output.Count());
         }
 
-        [Given(@"I added different (.*) in my cart")]
-        public void GivenIAddedInMyCart(int numberOfDifferentBooks)
+
+        [When(@"I add a book by its (.*)")]
+        public void WhenIAddABook(string title)
         {
-            List<Book> _books = _bookRepo.GetAllBooks().ToList();
-            
-            for (int i = 0; i< numberOfDifferentBooks; i++)
-            {
-                _cartRepo.AddBook(_books[i]);
-            }
+            _book = _books.First(b => b.Title == title);
+            _cartRepo.AddBook(_book);
+            Output = _cartRepo.GetCurrentCartList();
+        }
+
+        [Then(@"in my cart I must see the book")]
+        public void ThenInMyCartIMustSeeTheBook()
+        {
+            Assert.IsTrue(Output.Contains(_book));
         }
 
 
-        [When(@"I open my cart")]
-        public void WhenIOpenMyCart()
+        [When(@"I add (.*), (.*), (.*), (.*), (.*)")]
+        public void WhenIAdd(int book1, int book2, int book3, int book4, int book5)
         {
+            AddEachBooks(_books, book1, book2, book3, book4, book5);
             OutputPrice = _cartBo.GetTotalPrice();
         }
 
-        [Then(@"I have to see the total (.*)")]
-        public void ThenIHaveToSeeTheTotal(double totalPrice)
+        private void AddEachBooks(List<Book> _books, int book1, int book2, int book3, int book4, int book5)
         {
-            Assert.AreEqual(totalPrice, OutputPrice);
+            for (int i = 0; i < book1; i++)
+            {
+                _cartRepo.AddBook(_books[0]);
+            }
+            for (int i = 0; i < book2; i++)
+            {
+                _cartRepo.AddBook(_books[1]);
+            }
+            for (int i = 0; i < book3; i++)
+            {
+                _cartRepo.AddBook(_books[2]);
+            }
+            for (int i = 0; i < book4; i++)
+            {
+                _cartRepo.AddBook(_books[3]);
+            }
+            for (int i = 0; i < book5; i++)
+            {
+                _cartRepo.AddBook(_books[4]);
+            }
+
+
         }
 
 
-        [Given(@"I have a book (.*):")]
-        public void GivenIHaveABook(string title)
+        [Then(@"I have to see the total (.*) with discount applied")]
+        public void ThenIHaveToSeeTheTotalWithDiscountApplied(double price)
         {
-            _book = new Book();
-            _book.Title = title;
+            Assert.AreEqual(price, OutputPrice);
         }
 
-        [When(@"I add it")]
-        public void WhenIAddIt()
-        {
-            _cartRepo.AddBook(_book);
-            Output = _cartRepo.GetCurrentCartList(); ;
-        }
-
-        [Then(@"in my cart I must see the book (.*)")]
-        public void ThenInMyCartIMustSeeTheBook(string title)
-        {
-            Assert.IsTrue(Output.Any(x => x.Title == title));
-        }
     }
 }

@@ -42,7 +42,7 @@ namespace Kata_BookStore.BL
                 numberOfBooksById.Add(id,list.Where(b => b.Id == id).Count());
             }
 
-            return ApplyDiscountsAndGetTotalPrice(numberOfBooksById,list);
+            return Math.Round(ApplyDiscountsAndGetTotalPrice(numberOfBooksById,list),2);
         }
 
         private IDiscountStrategy GetTheDiscountStrategy(int numberOfDifferentBook)

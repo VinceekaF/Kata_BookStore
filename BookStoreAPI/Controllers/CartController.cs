@@ -36,7 +36,7 @@ namespace BookStoreAPI.Controllers
         [HttpGet("[action]")]
         public double GetTotalPrice()
         {
-            return Math.Round(_bo.GetTotalPrice(),2);
+            return _bo.GetTotalPrice();
         }
     }
 }

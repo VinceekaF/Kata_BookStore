@@ -99,6 +99,7 @@ this.ScenarioInitialize(scenarioInfo);
         [Xunit.TraitAttribute("FeatureTitle", "Feature")]
         [Xunit.TraitAttribute("Description", "Each time a customer add a book, it must be added in the cart")]
         [Xunit.InlineDataAttribute("3. Harry Potter et le prisonnier d\'Azkaban", new string[0])]
+        [Xunit.InlineDataAttribute("5. Harry Potter et le prince de sang-mêlé", new string[0])]
         public virtual void EachTimeACustomerAddABookItMustBeAddedInTheCart(string title, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Each time a customer add a book, it must be added in the cart", null, exampleTags);
@@ -106,35 +107,29 @@ this.ScenarioInitialize(scenarioInfo);
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 14
- testRunner.Given(string.Format("I have a book {0}:", title), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.When(string.Format("I add a book by its {0}", title), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 15
- testRunner.When("I add it", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 16
- testRunner.Then(string.Format("in my cart I must see the book {0}", title), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("in my cart I must see the book", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
-        [Xunit.TheoryAttribute(DisplayName="When I see my cart, I must see the current total price")]
+        [Xunit.TheoryAttribute(DisplayName="Computing the cart total price with discount")]
         [Xunit.TraitAttribute("FeatureTitle", "Feature")]
-        [Xunit.TraitAttribute("Description", "When I see my cart, I must see the current total price")]
-        [Xunit.InlineDataAttribute("3", "21.6", new string[0])]
-        [Xunit.InlineDataAttribute("1", "8", new string[0])]
-        [Xunit.InlineDataAttribute("2", "15.2", new string[0])]
-        [Xunit.InlineDataAttribute("4", "25.6", new string[0])]
-        [Xunit.InlineDataAttribute("5", "30", new string[0])]
-        public virtual void WhenISeeMyCartIMustSeeTheCurrentTotalPrice(string books, string price, string[] exampleTags)
+        [Xunit.TraitAttribute("Description", "Computing the cart total price with discount")]
+        [Xunit.InlineDataAttribute("5", "3", "4", "2", "1", "100.4", new string[0])]
+        [Xunit.InlineDataAttribute("2", "0", "2", "0", "1", "36.8", new string[0])]
+        [Xunit.InlineDataAttribute("0", "5", "5", "3", "1", "99.2", new string[0])]
+        public virtual void ComputingTheCartTotalPriceWithDiscount(string book1, string book2, string book3, string book4, string book5, string price, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When I see my cart, I must see the current total price", null, exampleTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Computing the cart total price with discount", null, exampleTags);
 #line 21
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 22
- testRunner.Given(string.Format("I added different {0} in my cart", books), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.When(string.Format("I add {0}, {1}, {2}, {3}, {4}", book1, book2, book3, book4, book5), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 23
- testRunner.When("I open my cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 24
- testRunner.Then(string.Format("I have to see the total {0}", price), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("I have to see the total {0} with discount applied", price), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
