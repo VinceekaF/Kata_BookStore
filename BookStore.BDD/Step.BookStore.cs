@@ -14,9 +14,16 @@ namespace BookStore.BDD
     [Binding]
     public sealed class Step
     {
-        IBookRepository _bookRepo = new InMemoryBookRepository();
-        static ICartRepository _cartRepo = new CartRepository();
-        ICartBo _cartBo = new CartBO(_cartRepo);
+        InMemoryBookRepository _bookRepo;
+        CartRepository _cartRepo;
+        CartBO _cartBo;
+
+        public Step()
+        {
+            _bookRepo = new InMemoryBookRepository();
+            _cartRepo = new CartRepository();
+            _cartBo = new CartBO(_cartRepo);
+        }
 
         public static IEnumerable<Book> Output
         {
@@ -47,13 +54,14 @@ namespace BookStore.BDD
             Assert.AreEqual(number,Output.Count());
         }
 
-        [Given(@"I added (.*) in my cart")]
-        public void GivenIAddedInMyCart(int numberOfBooksAdded)
+        [Given(@"I added different (.*) in my cart")]
+        public void GivenIAddedInMyCart(int numberOfDifferentBooks)
         {
-            Book _book = new Book() { Price = 8.0};
-            for (int i = 0; i<numberOfBooksAdded;i++)
+            List<Book> _books = _bookRepo.GetAllBooks().ToList();
+            
+            for (int i = 0; i< numberOfDifferentBooks; i++)
             {
-                _cartRepo.AddBook(_book);
+                _cartRepo.AddBook(_books[i]);
             }
         }
 
@@ -61,7 +69,7 @@ namespace BookStore.BDD
         [When(@"I open my cart")]
         public void WhenIOpenMyCart()
         {
-            OutputPrice = _cartBo.TotalPrice();
+            OutputPrice = _cartBo.GetTotalPrice();
         }
 
         [Then(@"I have to see the total (.*)")]

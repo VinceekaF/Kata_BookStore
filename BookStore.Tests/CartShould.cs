@@ -12,10 +12,10 @@ namespace BookStore.Tests
 {
     public class CartShould
     {
-        readonly InMemoryBookRepository _repo;
-        readonly CartRepository _myCart;
-        readonly IEnumerable<Book> list;
-        readonly CartBO bo;
+        private readonly InMemoryBookRepository _repo;
+        private readonly CartRepository _myCart;
+        private readonly IEnumerable<Book> list;
+        private readonly CartBO bo;
 
         public CartShould()
         {
