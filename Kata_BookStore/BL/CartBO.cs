@@ -65,10 +65,9 @@ namespace Kata_BookStore.BL
         private double ApplyDiscountsAndGetTotalPrice(Dictionary<Guid, int> numberOfBooksById, List<Book> list)
         {
             double totalPrice = 0;
-            int countOfDifferentBooks = 0;
+            int countOfDifferentBooks = numberOfBooksById.Where(_ => _.Value != 0).Count();;
             do
             {
-                countOfDifferentBooks = numberOfBooksById.Where(_ => _.Value != 0).Count();
                 IDiscountStrategy _strategy = GetTheDiscountStrategy(countOfDifferentBooks);
                 List<Book> bookList = new List<Book>();
                 numberOfBooksById.Where(_ => _.Value != 0)
@@ -80,8 +79,9 @@ namespace Kata_BookStore.BL
                 numberOfBooksById.Where(_ => _.Value != 0)
                     .ToList()
                     .ForEach(_ => numberOfBooksById[_.Key] -= 1);
+                countOfDifferentBooks = numberOfBooksById.Where(_ => _.Value != 0).Count();
             }
-            while (countOfDifferentBooks != 0);
+            while (countOfDifferentBooks != 0 );
 
             return totalPrice;
         }
